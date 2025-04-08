@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/chat_system?useSSL=false&characterEncoding=UTF8&useUnicode=true&serverTimeZone=Asia/Shanghai
+    username: root
+    password: zichenya
+  # application.yml
+  spring:
+    mvc:
+      static-path-pattern: /resources/**
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:com/chat/mapper/**/*.xml
+
+

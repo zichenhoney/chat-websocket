@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>IMessage - 聊天主界面</title>
+	<link rel="stylesheet" type="text/css" href="/css/main.css" />
+	<!-- 后续优化：引入 FontAwesome 图标库 -->
+	<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+	/>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<header id="topNav">
+	<div class="nav-left">
+		<button id="chatBtn" class="nav-btn active">聊天</button>
+		<button id="addFriendBtn" class="nav-btn">添加好友</button>
+	</div>
+	<div class="nav-right">
+		<span id="currentUserSpan">当前用户: JohnDoe</span>
+	</div>
+</header>
+
+<!-- 主体内容 -->
+<div id="mainContainer">
+	<!-- 左侧联系人列表 -->
+	<aside id="friendList">
+		<h3>联系人</h3>
+		<ul id="contacts"></ul>
+	</aside>
+
+	<!-- 右侧聊天区域 -->
+	<section id="chatArea">
+		<div id="chatHeader">
+			<!-- 如果未选中好友，不显示具体名称 -->
+			<h3 id="chatTitle">未选择好友</h3>
+		</div>
+		<!-- 聊天消息区 id 为 chatMessages，与 CSS 对应 -->
+		<div id="chatMessages"></div>
+		<div id="chatInput">
+			<input type="text" id="messageInput" placeholder="输入消息..." />
+			<button id="sendBtn">发送</button>
+		</div>
+	</section>
+</div>
+
+
+<!-- 添加好友模态窗口 -->
+<div id="addFriendModal" class="modal">
+	<div class="modal-content">
+		<span class="close-btn" id="modalClose">&times;</span>
+		<h3>添加好友</h3>
+		<input type="text" id="friendInput" placeholder="请输入好友用户名" />
+		<button id="confirmAddBtn">添加</button>
+	</div>
+</div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

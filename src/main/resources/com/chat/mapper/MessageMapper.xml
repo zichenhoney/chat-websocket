@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chat.dao.MessageMapper">
+
+
+
+    <!-- 获取聊天记录 -->
+    <select id="getChatHistory" resultType="com.chat.entity.Message">
+        SELECT *
+        FROM message
+        WHERE (senduser = #{user} AND receiveuser = #{friend})
+           OR (senduser = #{friend} AND receiveuser = #{user})
+        ORDER BY createdate
+    </select>
+
+</mapper>

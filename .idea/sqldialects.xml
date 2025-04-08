@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/chat_system.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/chat/dao/FriendsMapper.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/chat/dao/MessageMapper.java" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/chat/mapper/MessageMapper.xml" dialect="MySQL" />
+  </component>
+</project>
