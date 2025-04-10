@@ -1,10 +1,10 @@
 # 1.web聊天项目
 
-- Springboot+#websocket的web聊天项目
+Springboot+#websocket的web聊天项目
 
 # 2.技术栈
 
-Springboot、Mybatis、#websocket、MySQL
+Springboot、Mybatis、websocket、MySQL
 
 # 3.注意
 
