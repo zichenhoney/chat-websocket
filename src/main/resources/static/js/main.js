@@ -23,33 +23,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // 初始化 WebSocket 连接
 function initWebSocket() {
-    socket = new WebSocket("ws://localhost:8082/ws/" + currentUser);
+    socket = new WebSocket("ws://localhost:8080/chat");
 
     socket.onopen = function () {
-        console.log("WebSocket连接成功");
+        console.log("WebSocket 连接成功");
     };
 
     socket.onmessage = function (event) {
         console.log("收到消息:", event.data);
-        let msg = JSON.parse(event.data);
-
-        // 判断是否是当前聊天用户发来的消息
-        if (msg.senduser === currentChatUser || msg.senduser === currentUser) {
+        let msg = null;
+        try {
+            msg = JSON.parse(event.data);
+        } catch(e) {
+            console.error("JSON解析错误:", e);
+            return;
+        }
+        // 如果消息属于当前会话，则追加消息
+        if ( (msg.senduser === currentChatUser && msg.receiveuser === currentUser) ||
+            (msg.senduser === currentUser && msg.receiveuser === currentChatUser) ) {
             appendMessage(msg);
         } else {
-            // 可选：提示有新消息（弹窗/图标）
-            console.log("来自其他用户的消息:", msg.senduser);
+            // 其他会话的消息可以选择提示有新消息
+            console.log("来自其他会话的消息:", msg);
         }
     };
 
-    socket.onclose = function () {
-        console.log("WebSocket连接已关闭");
-    };
-
-    socket.onerror = function (error) {
-        console.error("WebSocket错误:", error);
-    };
 }
+
+
+
 
 // 统一：加载联系人详细信息
 function loadContacts() {
@@ -124,8 +126,6 @@ function loadContacts() {
 
 
 
-
-
 // 打开聊天窗口并加载聊天记录
 function openChat(friendName) {
     currentChatUser = friendName;
@@ -177,6 +177,31 @@ function loadChatHistory(friendName) {
         .catch(error => console.error("加载聊天记录失败:", error));
 }
 
+function appendMessage(msg) {
+    // 获取聊天显示容器
+    const chatMessages = document.getElementById("chatMessages");
+    // 创建一个消息 div
+    const div = document.createElement("div");
+    div.classList.add("message");
+
+    // 根据发送者来设置不同的样式
+    if (msg.senduser === sessionStorage.getItem("username")) {
+        div.classList.add("sent");
+    } else {
+        div.classList.add("received");
+    }
+
+    // 创建消息内容和发送时间的 HTML
+    let timeText = msg.createdate ? new Date(msg.createdate).toLocaleString() : new Date().toLocaleString();
+    div.innerHTML = `<p>${msg.detail}</p><span class="msgTime">${timeText}</span>`;
+
+    // 追加到聊天记录容器中
+    chatMessages.appendChild(div);
+    // 滚动到底部
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+
 // 发送消息
 function sendMessage() {
     if (!currentChatUser) {
@@ -197,6 +222,8 @@ function sendMessage() {
         createdate: null,
         status: null
     };
+
+
 
     // 通过 WebSocket 发送消息
     if (socket && socket.readyState === WebSocket.OPEN) {
