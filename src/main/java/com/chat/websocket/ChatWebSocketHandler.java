@@ -11,7 +11,6 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -81,7 +80,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             );
             session.sendMessage(new TextMessage(offlineMsg));
         }
-        // 可选：也给发送者回显
+        // 给发送者回显
         session.sendMessage(new TextMessage(jsonMsg));
     }
 
@@ -92,7 +91,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
         System.out.println("WebSocket connection closed for user: " + username + ", reason: " + status);
     }
 
-    // 用于返回系统消息的内部类（简单实现）
+    // 用于返回系统消息的内部类
     @Getter
     public static class MessageResponse {
         // getters and setters

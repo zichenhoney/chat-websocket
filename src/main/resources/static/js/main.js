@@ -53,7 +53,7 @@ function initWebSocket() {
 
 
 
-// 统一：加载联系人详细信息
+// 加载联系人详细信息
 function loadContacts() {
     let currentUser = sessionStorage.getItem("username");
     if (!currentUser) {
@@ -86,7 +86,7 @@ function loadContacts() {
                 // 创建头像 <img>
                 let avatarImg = document.createElement("img");
 
-                // 拼接头像路径，假设使用用户 ID 来构建头像路径
+                // 拼接头像路径
                 avatarImg.src = friend.avatar
                     ? `/avatar/${friend.avatar}`  // 使用存储的 avatar 字段作为文件名
                     : `/avatar/avatar_${friend.id}.jpg`;  // 使用用户 ID 来构建头像路径
@@ -98,7 +98,7 @@ function loadContacts() {
                 nameSpan.classList.add("contact-name");
                 nameSpan.textContent = friend.name;  // 显示联系人名称
 
-                // 创建最后一条消息 <span>（可选）
+                // 创建最后一条消息 <span>
                 let lastMsgSpan = document.createElement("span");
                 lastMsgSpan.classList.add("contact-last-message");
                 lastMsgSpan.textContent = friend.lastMessage || "";
@@ -115,7 +115,7 @@ function loadContacts() {
 
                 // 绑定点击事件：点击后打开聊天窗口
                 li.addEventListener("click", function () {
-                    openChat(friend.name);  // 使用 friend.name（或者 friend.id）
+                    openChat(friend.name);  // 使用 friend.name
                 });
 
                 contactsList.appendChild(li);
@@ -134,7 +134,7 @@ function openChat(friendName) {
 }
 
 
-// 加载聊天记录（单一定义）
+// 加载聊天记录
 function loadChatHistory(friendName) {
     let currentUser = sessionStorage.getItem("username");
     if (!currentUser) {
@@ -152,7 +152,7 @@ function loadChatHistory(friendName) {
                 document.getElementById("chatMessages").innerHTML = "<p>加载聊天记录失败</p>";
                 return;
             }
-            let messages = result.data; // 假设返回格式为 { code:200, data: [...] }
+            let messages = result.data;
             let chatMessages = document.getElementById("chatMessages");
             chatMessages.innerHTML = ""; // 清空记录
             if (!messages || messages.length === 0) {
@@ -266,7 +266,7 @@ document.getElementById("addFriendBtn").addEventListener("click", function() {
     document.getElementById("chatBtn").classList.remove("active");
 });
 
-// 示例：添加好友函数（如果需要）
+// 示例：添加好友函数
 function addFriend() {
     let currentUser = sessionStorage.getItem("username");
     let friendName = document.getElementById("friendInput").value.trim();

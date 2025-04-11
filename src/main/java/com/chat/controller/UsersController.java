@@ -47,14 +47,14 @@ public class UsersController {
         Map<String, Object> response = new HashMap<>();
 
         if(null!=users) {
-            // 存入 session，前端可以通过 API 获取用户名
+            // 存入 session，前端通过 API 获取用户名
             session.setAttribute("username", users.getUsername());
 
             System.out.println("Session 存储的用户名：" + session.getAttribute("username"));
 
 
             response.put("success", true);
-            // 登录成功后跳转到 main.html 页面（请确保该页面存在于静态资源中，例如 /user/main.html）
+            // 登录成功后跳转到 main.html 页面
             response.put("redirect", "/html/main.html");
             return ResponseEntity.ok(response);
 
@@ -68,13 +68,13 @@ public class UsersController {
     public ResponseEntity<Map<String, Object>> register(@RequestBody Users user) {
         Map<String, Object> response = new HashMap<>();
 
-        // 为用户分配头像，假设根据用户名生成头像编号
-        int avatarNumber = (int) (Math.random() * 20) + 1; // 随机选择一个头像编号（这里假设有 20 个头像）
+        // 为用户分配头像
+        int avatarNumber = (int) (Math.random() * 20) + 1; // 随机选择一个头像编号
         String avatarFileName = "avatar_" + avatarNumber + ".jpg";
 
         user.setAvatar(avatarFileName); // 设置用户头像路径（存储的是文件名）
 
-        // 先查询是否存在相同的用户名
+        // 查询是否存在相同的用户名
         boolean success = usersService.register(user);
 
         if (success) {
