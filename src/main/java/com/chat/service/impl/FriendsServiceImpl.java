@@ -32,7 +32,7 @@ public class FriendsServiceImpl extends ServiceImpl<FriendsMapper, Friends> impl
         }
     }
 
-    // 新增：获取好友列表
+    // 获取好友列表
     @Override
     public List<String> getFriendsByUsername(String userName) {
         return friendsMapper.getFriendsByUsername(userName);

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResultVO {
-    // 业务响应码
+    // 业务响应
     private Integer code;
     // 业务消息
     private String msg;

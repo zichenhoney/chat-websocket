@@ -61,9 +61,9 @@ public class FriendsController {
     @GetMapping("")
     public ResponseEntity<Map<String, Object>> getFriendsList(@RequestParam String user_name) {
         System.out.println("查询好友列表，当前用户：" + user_name);
-        // 原先返回好友名称的列表
+        // 返回好友名称的列表
         List<String> friendNames = friendsService.getFriendsByUsername(user_name);
-        // 新建一个列表，用于存放好友详细信息
+        // 存放好友详细信息
         List<Map<String, String>> friendsInfo = new ArrayList<>();
         for (String friendName : friendNames) {
             // 根据好友名称查询用户详细信息
@@ -72,7 +72,7 @@ public class FriendsController {
                 Map<String, String> info = new HashMap<>();
                 info.put("name", friend.getUsername());
                 info.put("avatar", friend.getAvatar()); // 头像文件名，例如 "alice.png"
-                // 可选：如果有最近聊天记录，可以添加 info.put("lastMessage", lastMessage);
+                // 最近聊天记录
                 friendsInfo.add(info);
             }
         }

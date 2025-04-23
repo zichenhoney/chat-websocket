@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UsersService extends IService<Users> {
-    // 可添加注册、登录等自定义方法
+    // 注册自定义方法
     boolean register(Users user);
 }
 
